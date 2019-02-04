@@ -14,7 +14,7 @@ set -o nounset    # fail on unset variables
 HEROKU_TEAM_NAME=""
 
 # Descriptive name for the Heroku app (e.g. gifter)
-HEROKU_APP_NAME="YOUR_APP_NAME"
+HEROKU_APP_NAME="bpd-test"
 
 # Name of the Heroku apps you'll use
 HEROKU_DEV_APP_NAME="$HEROKU_APP_NAME-dev"
