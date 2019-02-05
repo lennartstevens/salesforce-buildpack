@@ -121,7 +121,7 @@ if [ ! "$STAGE" == "" ]; then
       
         log "Set package version as released ..."
 
-        invokeCmd "sfdx force:package:version:update -i \"$SFDX_PACKAGE_ID\" --noprompt --setasreleased"
+        invokeCmd "sfdx force:package:version:update -p \"$SFDX_PACKAGE_ID\" --noprompt --setasreleased"
 
       fi    
     
