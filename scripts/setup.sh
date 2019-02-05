@@ -14,27 +14,27 @@ set -o nounset    # fail on unset variables
 HEROKU_TEAM_NAME=""
 
 # Descriptive name for the Heroku app (e.g. gifter)
-HEROKU_APP_NAME="bpd-test"
+HEROKU_APP_NAME="bpd"
 
 # Name of the Heroku apps you'll use
-HEROKU_DEV_APP_NAME="$HEROKU_APP_NAME-dev"
+HEROKU_DEV_APP_NAME="$HEROKU_APP_NAME-development"
 HEROKU_STAGING_APP_NAME="$HEROKU_APP_NAME-staging"
-HEROKU_PROD_APP_NAME="$HEROKU_APP_NAME-prod"
+HEROKU_PROD_APP_NAME="$HEROKU_APP_NAME-production"
 
 # Pipeline
 HEROKU_PIPELINE_NAME="$HEROKU_APP_NAME-pipeline"
 
 # Usernames or aliases of the orgs you're using
-DEV_HUB_USERNAME="HubOrg"
+DEV_HUB_USERNAME="DevHub"
 DEV_USERNAME="DevOrg"
 STAGING_USERNAME="TestOrg"
 PROD_USERNAME="ProdOrg"
 
 # Repository with your code (e.g. wadewegner/GIFter)
-GITHUB_REPO="YOUR_GITHUB_REPO"
+GITHUB_REPO="lennartstevens/bpd-erik"
 
 # Your package name (e.g. GIFter)
-PACKAGE_NAME="YOUR_PACKAGE_NAME"
+PACKAGE_NAME="test_package"
 
 ### Setup script
 
@@ -104,13 +104,13 @@ prodSfdxAuthUrl=$(sfdx force:org:display --verbose -u $PROD_USERNAME --json | jq
 heroku config:set SFDX_AUTH_URL=$prodSfdxAuthUrl -a $HEROKU_PROD_APP_NAME
 
 # Add buildpacks to apps (to use latest remove version info)
-heroku buildpacks:add -i 1 https://github.com/heroku/salesforce-cli-buildpack#v3 -a $HEROKU_DEV_APP_NAME
-heroku buildpacks:add -i 1 https://github.com/heroku/salesforce-cli-buildpack#v3 -a $HEROKU_STAGING_APP_NAME
-heroku buildpacks:add -i 1 https://github.com/heroku/salesforce-cli-buildpack#v3 -a $HEROKU_PROD_APP_NAME
+heroku buildpacks:add -i 1 https://github.com/lennartstevens/salesforce-cli-buildpack#v3 -a $HEROKU_DEV_APP_NAME
+heroku buildpacks:add -i 1 https://github.com/lennartstevens/salesforce-cli-buildpack#v3 -a $HEROKU_STAGING_APP_NAME
+heroku buildpacks:add -i 1 https://github.com/lennartstevens/salesforce-cli-buildpack#v3 -a $HEROKU_PROD_APP_NAME
 
-heroku buildpacks:add -i 2 https://github.com/heroku/salesforce-buildpack#v2 -a $HEROKU_DEV_APP_NAME
-heroku buildpacks:add -i 2 https://github.com/heroku/salesforce-buildpack#v2 -a $HEROKU_STAGING_APP_NAME
-heroku buildpacks:add -i 2 https://github.com/heroku/salesforce-buildpack#v2 -a $HEROKU_PROD_APP_NAME
+heroku buildpacks:add -i 2 https://github.com/lennartstevens/salesforce-buildpack#v2 -a $HEROKU_DEV_APP_NAME
+heroku buildpacks:add -i 2 https://github.com/lennartstevens/salesforce-buildpack#v2 -a $HEROKU_STAGING_APP_NAME
+heroku buildpacks:add -i 2 https://github.com/lennartstevens/salesforce-buildpack#v2 -a $HEROKU_PROD_APP_NAME
 
 # Create Pipeline
 heroku pipelines:create $HEROKU_PIPELINE_NAME -a $HEROKU_DEV_APP_NAME -s development $HEROKU_TEAM_FLAG
